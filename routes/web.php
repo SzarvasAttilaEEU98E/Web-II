@@ -20,7 +20,7 @@ Route::get('/kapcsolat', function () {
 Route::post('/kapcsolat', [KapcsolatController::class, 'uzenetKuldes'])
     ->name('uzenet.kuldes');
 
-Route::get('/uzenetek', [UzenetController::class, 'uzenetLekero'])
+Route::get('/uzenetek', [UzenetController::class, 'uzenetekLekero'])
     ->name('uzenetek');
 //TEST
 /*
