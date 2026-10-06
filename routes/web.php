@@ -32,27 +32,30 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/uzenetek', [UzenetController::class, 'uzenetekLekero'])
         ->name('uzenetek');
 
-    Route::get('/admin', [AdminController::class, 'adminPage'])
-        ->name('admin');
+    // Csak admin jogosultsággal elérhető oldalak
+    Route::middleware('admin')->group(function () {
 
-    Route::get('/admin/filmek', [FilmController::class, 'getAll'])
-        ->name('admin.filmek.getAll');
+        Route::get('/admin', [AdminController::class, 'adminPage'])
+            ->name('admin');
 
-    Route::get('/admin/filmek/create', [FilmController::class, 'create'])
-        ->name('admin.filmek.create');
+        Route::get('/admin/filmek', [FilmController::class, 'getAll'])
+            ->name('admin.filmek.getAll');
 
-    Route::post('/admin/filmek', [FilmController::class, 'store'])
-        ->name('admin.filmek.store');
-    
-    Route::get('/admin/filmek/{id}/edit', [FilmController::class, 'edit'])
-        ->name('admin.filmek.edit');
+        Route::get('/admin/filmek/create', [FilmController::class, 'create'])
+            ->name('admin.filmek.create');
 
-    Route::put('/admin/filmek/{id}', [FilmController::class, 'update'])
-        ->name('admin.filmek.update');
+        Route::post('/admin/filmek', [FilmController::class, 'store'])
+            ->name('admin.filmek.store');
 
-    Route::delete('/admin/filmek/{id}', [FilmController::class, 'destroy'])
-        ->name('admin.filmek.destroy');
+        Route::get('/admin/filmek/{id}/edit', [FilmController::class, 'edit'])
+            ->name('admin.filmek.edit');
+
+        Route::put('/admin/filmek/{id}', [FilmController::class, 'update'])
+            ->name('admin.filmek.update');
+
+        Route::delete('/admin/filmek/{id}', [FilmController::class, 'destroy'])
+            ->name('admin.filmek.destroy');
+    });
 });
-
 
 require __DIR__.'/auth.php';

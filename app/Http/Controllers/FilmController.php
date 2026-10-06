@@ -73,7 +73,7 @@ class FilmController extends Controller
      */
     public function destroy(string $id)
     {
-        $film = Film::findOrFailű($id);
+        $film = Film::findOrFail($id);
 
         $film->delete();
 
